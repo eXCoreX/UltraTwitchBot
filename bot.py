@@ -11,6 +11,14 @@ import socket
 DEBUG_MODE = False
 
 def main():
+    if config.NICK == "":
+        config.NICK = input("Enter bot's nick: ")
+    if config.PASS == "":
+        config.PASS = input("Enter bot's chat token: ")
+    print("Would you like to change target channel? (y/n)")
+    sym = input()
+    if sym == 'y':
+        config.CHAN = input("Enter channel name: ")
     s = socket.socket()
     s.connect((config.HOST, config.PORT))
     s.send("PASS {}\r\n".format(config.PASS).encode("utf-8"))
@@ -32,6 +40,13 @@ def main():
             message = chat_message.sub("", response)
             print(response)
             #print(message.strip() == "!timeout excorex 30")
+            if message.strip() == "!help":
+                utils.msg(s, "Available chat commands:")
+                utils.msg(s, "!time - Shows current time")
+                utils.msg(s, "!oplist - Shows online ops")
+                utils.msg(s, "!promote - ...")
+                utils.msg(s, "!chatters - Shows current chatters' list")
+                utils.msg(s, "!to <nick> <time in secs> - timeout some user(only for mods)")
             if message.strip() == "!time":
                 utils.msg(s, "It's currently " + time.strftime("%I:%M %p %Z on %A %B %d %Y"))
 
