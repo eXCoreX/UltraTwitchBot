@@ -39,7 +39,8 @@ def main():
             username = re.search(r"\w+", response).group(0)
             message = chat_message.sub("", response)
             print(response)
-            #print(message.strip() == "!timeout excorex 30")
+            print(message)
+            # print(message.strip() == "!timeout excorex 30")
             if message.strip() == "!help":
                 utils.msg(s, "Available chat commands:")
                 utils.msg(s, "!time - Shows current time")
@@ -48,7 +49,7 @@ def main():
                 utils.msg(s, "!chatters - Shows current chatters' list")
                 utils.msg(s, "!to <nick> <time in secs> - timeout some user(only for mods)")
             if message.strip() == "!time":
-                utils.msg(s, "It's currently " + time.strftime("%I:%M %p %Z on %A %B %d %Y"))
+                utils.msg(s, "It's currently " + time.strftime("%H:%M on %A %B %d %Y"))
 
             if message.strip() == "!oplist":
                 utils.msg(s, "Op list: ")
@@ -56,7 +57,7 @@ def main():
                     utils.msg(s, "{}: {}".format(e, config.oplist[e]))
 
             if message.strip() == "!promote":
-                utils.msg(s, "Dota = говно")
+                utils.msg(s, "Dota 2 = #####")
                 utils.msg(s, "eXCore = царь")
 
             if re.fullmatch(r"!to \w+ \d+", message.strip()) and utils.isOp(username):
